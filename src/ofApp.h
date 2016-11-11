@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOpenCv.h"
+#include "Planet.h"
 
 class ofApp : public ofBaseApp{
 
@@ -22,19 +23,10 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    ofVideoPlayer moonVideo;
-    ofxCvColorImage moonColor;
-    ofxCvGrayscaleImage moonGrey;
-    
-    ofxCvContourFinder moonContour;
-    
-    int moonWidth;
-    int moonHeight;
+    Planet moon;
+    Planet mercury;
+    Planet sun;
+    Planet jupiter;
     
     int radius = 200;
-    float moonNewWidth;
-    float moonNewHeight;
-    
-    ofPoint moonTranslate;
-		
 };
