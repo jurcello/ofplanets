@@ -2,11 +2,15 @@
 
 #include "ofMain.h"
 #include "ofxOpenCv.h"
+#include "ofxOsc.h"
 #include "PlanetVideo.h"
 #include "PlanetImage.h"
 #include "Planet.h"
 #include "ofxGui.h"
 #include <map>
+
+// listen on port 1337
+#define PORT 1337
 
 class ofApp : public ofBaseApp{
 
@@ -43,6 +47,8 @@ class ofApp : public ofBaseApp{
     ofxFloatSlider fadeTime;
     
     ofxFloatSlider sunStrenght;
+    ofxFloatSlider gain;
+   	ofxOscReceiver receiver;
     
     bool showGui = false;
 };

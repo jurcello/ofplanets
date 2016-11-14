@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
     // Setup gui.
     fadeTime.addListener(this, &ofApp::fadeTimeChanged);
     gui.setup();
@@ -10,6 +11,12 @@ void ofApp::setup(){
     gui.add(offsetY.setup("Y offset", 0, -500, 500));
     gui.add(fadeTime.setup("Fade time", 2000, 500, 5000));
     gui.add(sunStrenght.setup("SunStrenght", 0.0, 0.0, 1.0));
+    gui.add(gain.setup("Gain", 1.0, 0.5, 10.0));
+    
+    // Setup osc.
+    // listen on the given port
+    cout << "listening for osc messages on port " << PORT << "\n";
+    receiver.setup(PORT);
 
     
     planets['1'] = new PlanetVideo;
@@ -55,6 +62,16 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    // check for waiting messages
+    while(receiver.hasWaitingMessages()){
+        // get the next message
+        ofxOscMessage m;
+        receiver.getNextMessage(m);
+        if(m.getAddress() == "/sunmachine"){
+            sunStrenght = m.getArgAsFloat(0) * gain;
+        }
+    }
+
     for (auto& planet: planets) {
         planet.second->update();
     }
