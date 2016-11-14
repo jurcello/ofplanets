@@ -8,15 +8,20 @@ void ofApp::setup(){
     gui.add(offsetX.setup("X offset", 0, -500, 500));
     gui.add(offsetY.setup("Y offset", 0, -500, 500));
     
-    moon.setup("Moon.mp4");
-    jupiter.setup("Jupiter.mp4");
+    planets['a'] = *new Planet;
+    planets['a'].setup("Moon.mp4");
+    planets['s'] = *new Planet;
+    planets['s'].setup("Jupiter.mp4");
+    
+    
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    moon.update();
-    jupiter.update();
+    for (auto& planet: planets) {
+        planet.second.update();
+    }
 }
 
 //--------------------------------------------------------------
@@ -25,8 +30,10 @@ void ofApp::draw(){
     if (showGui) {
         gui.draw();
     }
-    moon.draw();
-    jupiter.draw();
+    for (auto& planet: planets) {
+        planet.second.draw();
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -53,24 +60,25 @@ void ofApp::keyPressed(int key){
         case 'g':
             showGui = !showGui;
             break;
-        case 'm':
-            moon.setOn(true);
-            jupiter.setOn(false);
-            break;
-        case 'j':
-            jupiter.setOn(true);
-            moon.setOn(false);
+        default:
+            turnOtherOff(key);
+            planets[key].setOn(true);
             break;
             
     }
-    moon.setRadius(radius);
-    moon.setOffsetX(offsetX);
-    moon.setOffsetY(offsetY);
-    jupiter.setRadius(radius);
-    jupiter.setOffsetX(offsetX);
-    jupiter.setOffsetY(offsetY);
+    for (auto& planet: planets) {
+        planet.second.setRadius(radius);
+        planet.second.setOffsetX(offsetX);
+        planet.second.setOffsetY(offsetY);
+    }
 }
 
+void ofApp::turnOtherOff(int except) {
+    for (auto& planet: planets) {
+        if (planet.first != except)
+        planet.second.setOn(false);
+    }
+}
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 

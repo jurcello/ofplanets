@@ -4,6 +4,7 @@
 #include "ofxOpenCv.h"
 #include "Planet.h"
 #include "ofxGui.h"
+#include <map>
 
 class ofApp : public ofBaseApp{
 
@@ -24,10 +25,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    Planet moon;
-    Planet mercury;
-    Planet sun;
-    Planet jupiter;
+    void turnOtherOff(int except);
+    
+    map<int, Planet> planets;
     
     // Gui.
     ofxPanel gui;
