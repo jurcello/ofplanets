@@ -4,17 +4,43 @@
 void ofApp::setup(){
     // Setup gui.
     gui.setup();
-    gui.add(radius.setup("Radius", 200, 10, 800));
+    gui.add(radius.setup("Radius", 500, 10, 800));
     gui.add(offsetX.setup("X offset", 0, -500, 500));
     gui.add(offsetY.setup("Y offset", 0, -500, 500));
     
-    planets['a'] = new PlanetVideo;
-    planets['a']->setup("Moon.mp4");
-    planets['s'] = new PlanetVideo;
-    planets['s']->setup("Jupiter.mp4");
+    planets['1'] = new PlanetVideo;
+    planets['1']->setup("Moon.mp4");
+    planets['2'] = new PlanetVideo;
+    planets['2']->setup("Jupiter.mp4");
+    planets['3'] = new PlanetVideo;
+    planets['3']->setup("Mercury.mp4");
+    planets['4'] = new PlanetVideo;
+    planets['4']->setup("Mars.mp4");
     
+    planets['q'] = new PlanetImage;
+    planets['q']->setup("PROTOTYPE PLANETS_01.jpg");
+    planets['w'] = new PlanetImage;
+    planets['w']->setup("PROTOTYPE PLANETS_02.jpg");
+    planets['e'] = new PlanetImage;
+    planets['e']->setup("PROTOTYPE PLANETS_03.jpg");
+    planets['r'] = new PlanetImage;
+    planets['r']->setup("PROTOTYPE PLANETS_04.jpg");
+    planets['t'] = new PlanetImage;
+    planets['t']->setup("PROTOTYPE PLANETS_05.jpg");
+    planets['y'] = new PlanetImage;
+    planets['y']->setup("PROTOTYPE PLANETS_06.jpg");
+    planets['u'] = new PlanetImage;
+    planets['u']->setup("PROTOTYPE PLANETS_07.jpg");
+    planets['i'] = new PlanetImage;
+    planets['i']->setup("PROTOTYPE PLANETS_08.jpg");
+    planets['o'] = new PlanetImage;
+    planets['o']->setup("PROTOTYPE PLANETS_09.jpg");
     
-    
+    for (auto& planet: planets) {
+        planet.second->setRadius(radius);
+        planet.second->setOffsetX(offsetX);
+        planet.second->setOffsetY(offsetY);
+    }
 }
 
 //--------------------------------------------------------------

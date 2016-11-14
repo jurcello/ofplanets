@@ -32,6 +32,10 @@ void Planet::setOn(bool isOn) {
     on = isOn;
 }
 
+bool Planet::shouldUpdate() {
+    return isOn() || (!isOn() && changing);
+}
+
 void Planet::updateFading() {
     if (changing) {
         float currentTime = ofGetElapsedTimeMillis();

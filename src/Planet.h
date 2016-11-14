@@ -28,6 +28,7 @@ public:
     void setOn(bool isOn);
 
 protected:
+    bool shouldUpdate();
     void updateFading();
         
     int width;

@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "PlanetVideo.h"
+#include "PlanetImage.h"
 #include "Planet.h"
 #include "ofxGui.h"
 #include <map>

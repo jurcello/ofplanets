@@ -1,47 +1,44 @@
 //
-//  PlanetVideo.cpp
+//  PlanetImage.cpp
 //  sunMachine
 //
-//  Created by Jur de Vries on 11/11/16.
+//  Created by Jur de Vries on 14/11/16.
 //
 //
 
-#include "PlanetVideo.h"
+#include "PlanetImage.h"
 
-void PlanetVideo::setup(string videoName) {
-    video.load(videoName);
-    video.play();
-    video.setLoopState(OF_LOOP_NORMAL);
-    width = video.getWidth();
-    height = video.getHeight();
+void PlanetImage::setup(string imageName) {
+
+    image.load(imageName);
+    width = image.getWidth();
+    height = image.getHeight();
     
     colorImage.allocate(width, height);
+    colorImage.setFromPixels(image.getPixels());
     greyScaleImage.allocate(width, height);
+    
+    findContours();
 }
 
-void PlanetVideo::update() {
-
-    video.update();
- 
-    if (video.isFrameNew()) {
-        // Update the fading behaviour.
+void PlanetImage::update() {
+    if (shouldUpdate()) {
         updateFading();
         // End of update fading behaviour.
         updateTranslation();
     }
+
 }
 
-void PlanetVideo::draw() {
+void PlanetImage::draw() {
     if (shouldUpdate()) {
         ofSetColor(255, 255, 255, opacity);
-        video.draw(moonTranslate, newWidth, newHeight);
+        image.draw(moonTranslate, newWidth, newHeight);
         ofSetColor(255, 255, 255, 255);
     }
 }
 
-void PlanetVideo::updateTranslation() {
-    // Update the color image.
-    colorImage.setFromPixels(video.getPixels());
+void PlanetImage::findContours() {
     // Set the grey scale image from the color image.
     greyScaleImage = colorImage;
     
@@ -55,7 +52,10 @@ void PlanetVideo::updateTranslation() {
     
     // Find the contours.
     contour.findContours(greyScaleImage, width*height / 7, width*height, 10, false);
-    
+}
+
+
+void PlanetImage::updateTranslation() {
     if (contour.nBlobs > 0) {
         // Now correct for the radius we want.
         double factorX = radius / contour.blobs[0].boundingRect.width;
@@ -64,13 +64,13 @@ void PlanetVideo::updateTranslation() {
         // Calculate the translation.
         moonTranslate.x = ofWindowSettings().width/2 - contour.blobs[0].centroid.x * factorX;
         moonTranslate.y = ofWindowSettings().height/2 - contour.blobs[0].centroid.y * factorY;
+
         
         // As a last thing: add the offsets.
         moonTranslate.x += offsetX;
         moonTranslate.y += offsetY;
         
-        newWidth = factorX * video.getWidth();
-        newHeight = factorY * video.getHeight();
-        
+        newWidth = factorX * width;
+        newHeight = factorY * height;
     }
 }
