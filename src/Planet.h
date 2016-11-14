@@ -22,8 +22,14 @@ public:
     
     void setOffsetX(int offset);
     void setOffsetY(int offset);
+    
+    bool isOn();
+    void setOn(bool isOn);
 
 protected:
+    void updateFading();
+    void updateTranslation();
+    
     
     ofVideoPlayer video;
     ofxCvColorImage colorImage;
@@ -42,6 +48,13 @@ protected:
     float newHeight;
     
     ofPoint moonTranslate;
+    
+    // Fading behaviour
+    float fadeTime = 2000;
+    int stateChangedTime = 0;
+    bool on = false;
+    bool changing = false;
+    int opacity = 0;
 };
 
 #endif /* Planet_hpp */

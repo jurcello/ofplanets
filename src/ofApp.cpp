@@ -15,7 +15,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-//    moon.update();
+    moon.update();
     jupiter.update();
 }
 
@@ -25,7 +25,7 @@ void ofApp::draw(){
     if (showGui) {
         gui.draw();
     }
-//    moon.draw();
+    moon.draw();
     jupiter.draw();
 }
 
@@ -52,6 +52,14 @@ void ofApp::keyPressed(int key){
             break;
         case 'g':
             showGui = !showGui;
+            break;
+        case 'm':
+            moon.setOn(true);
+            jupiter.setOn(false);
+            break;
+        case 'j':
+            jupiter.setOn(true);
+            moon.setOn(false);
             break;
             
     }
