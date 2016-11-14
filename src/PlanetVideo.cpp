@@ -36,45 +36,6 @@ void PlanetVideo::draw() {
     ofSetColor(255, 255, 255, 255);
 }
 
-void PlanetVideo::setRadius(int newRadius) {
-    radius = newRadius;
-}
-
-void PlanetVideo::setOffsetX(int offset) {
-    offsetX = offset;
-}
-
-void PlanetVideo::setOffsetY(int offset) {
-    offsetY = offset;
-}
-
-bool PlanetVideo::isOn() {
-    return on;
-}
-
-void PlanetVideo::setOn(bool isOn) {
-    if (on != isOn) {
-        stateChangedTime = ofGetElapsedTimeMillis();
-        changing = true;
-    }
-    on = isOn;
-}
-
-void PlanetVideo::updateFading() {
-    if (changing) {
-        float currentTime = ofGetElapsedTimeMillis();
-        // Get the ratio for the fade.
-        float ratio = (currentTime - stateChangedTime) / fadeTime;
-        cout << "Changing ratio: " << ratio << ", current time: " << currentTime << ", stateChanged time: " << stateChangedTime << ", fadetime: " << fadeTime << "\n";
-        // If the ratio is bigger than one, the fade is finished.
-        if (ratio > 1) {
-            changing = false;
-            ratio = 1;
-        }
-        opacity = on ? ratio * 255 : (1 - ratio) * 255;
-    }
-}
-
 void PlanetVideo::updateTranslation() {
     // Update the color image.
     colorImage.setFromPixels(video.getPixels());

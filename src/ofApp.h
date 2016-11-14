@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "PlanetVideo.h"
+#include "Planet.h"
 #include "ofxGui.h"
 #include <map>
 
@@ -27,7 +28,7 @@ class ofApp : public ofBaseApp{
     
     void turnOtherOff(int except);
     
-    map<int, PlanetVideo> planets;
+    map<int, Planet*> planets;
     
     // Gui.
     ofxPanel gui;
