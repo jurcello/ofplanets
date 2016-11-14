@@ -8,9 +8,9 @@ void ofApp::setup(){
     gui.add(offsetX.setup("X offset", 0, -500, 500));
     gui.add(offsetY.setup("Y offset", 0, -500, 500));
     
-    planets['a'] = *new Planet;
+    planets['a'] = *new PlanetVideo;
     planets['a'].setup("Moon.mp4");
-    planets['s'] = *new Planet;
+    planets['s'] = *new PlanetVideo;
     planets['s'].setup("Jupiter.mp4");
     
     

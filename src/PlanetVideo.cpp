@@ -1,14 +1,14 @@
 //
-//  Planet.cpp
+//  PlanetVideo.cpp
 //  sunMachine
 //
 //  Created by Jur de Vries on 11/11/16.
 //
 //
 
-#include "Planet.h"
+#include "PlanetVideo.h"
 
-void Planet::setup(string videoName) {
+void PlanetVideo::setup(string videoName) {
     video.load(videoName);
     video.play();
     video.setLoopState(OF_LOOP_NORMAL);
@@ -19,7 +19,7 @@ void Planet::setup(string videoName) {
     greyScaleImage.allocate(width, height);
 }
 
-void Planet::update() {
+void PlanetVideo::update() {
     video.update();
     
     if (video.isFrameNew()) {
@@ -30,29 +30,29 @@ void Planet::update() {
     }
 }
 
-void Planet::draw() {
+void PlanetVideo::draw() {
     ofSetColor(255, 255, 255, opacity);
     video.draw(moonTranslate, newWidth, newHeight);
     ofSetColor(255, 255, 255, 255);
 }
 
-void Planet::setRadius(int newRadius) {
+void PlanetVideo::setRadius(int newRadius) {
     radius = newRadius;
 }
 
-void Planet::setOffsetX(int offset) {
+void PlanetVideo::setOffsetX(int offset) {
     offsetX = offset;
 }
 
-void Planet::setOffsetY(int offset) {
+void PlanetVideo::setOffsetY(int offset) {
     offsetY = offset;
 }
 
-bool Planet::isOn() {
+bool PlanetVideo::isOn() {
     return on;
 }
 
-void Planet::setOn(bool isOn) {
+void PlanetVideo::setOn(bool isOn) {
     if (on != isOn) {
         stateChangedTime = ofGetElapsedTimeMillis();
         changing = true;
@@ -60,7 +60,7 @@ void Planet::setOn(bool isOn) {
     on = isOn;
 }
 
-void Planet::updateFading() {
+void PlanetVideo::updateFading() {
     if (changing) {
         float currentTime = ofGetElapsedTimeMillis();
         // Get the ratio for the fade.
@@ -75,7 +75,7 @@ void Planet::updateFading() {
     }
 }
 
-void Planet::updateTranslation() {
+void PlanetVideo::updateTranslation() {
     // Update the color image.
     colorImage.setFromPixels(video.getPixels());
     // Set the grey scale image from the color image.

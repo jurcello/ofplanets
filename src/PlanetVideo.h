@@ -1,19 +1,19 @@
 //
-//  Planet.hpp
+//  PlanetVideo.hpp
 //  sunMachine
 //
 //  Created by Jur de Vries on 11/11/16.
 //
 //
 
-#ifndef Planet_hpp
-#define Planet_hpp
+#ifndef PlanetVideo_h
+#define PlanetVideo_h
 
 #include <stdio.h>
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 
-class Planet {
+class PlanetVideo {
 public:
     void setup(string videoName);
     void update();
@@ -57,4 +57,4 @@ protected:
     int opacity = 0;
 };
 
-#endif /* Planet_hpp */
+#endif /* PlanetVideo_h */
