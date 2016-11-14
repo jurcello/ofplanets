@@ -32,6 +32,10 @@ void Planet::setOn(bool isOn) {
     on = isOn;
 }
 
+void Planet::setFadeTime(float newFadeTime) {
+    fadeTime = newFadeTime;
+}
+
 bool Planet::shouldUpdate() {
     return isOn() || (!isOn() && changing);
 }

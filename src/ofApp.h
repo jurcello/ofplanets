@@ -28,6 +28,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     void turnOtherOff(int except);
+    void fadeTimeChanged(float &fadeTime);
     
     map<int, Planet*> planets;
     
@@ -37,6 +38,7 @@ class ofApp : public ofBaseApp{
     ofxIntSlider radius;
     ofxIntSlider offsetX;
     ofxIntSlider offsetY;
+    ofxFloatSlider fadeTime;
     
     bool showGui = false;
 };

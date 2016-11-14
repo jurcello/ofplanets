@@ -3,10 +3,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     // Setup gui.
+    fadeTime.addListener(this, &ofApp::fadeTimeChanged);
     gui.setup();
     gui.add(radius.setup("Radius", 500, 10, 800));
     gui.add(offsetX.setup("X offset", 0, -500, 500));
     gui.add(offsetY.setup("Y offset", 0, -500, 500));
+    gui.add(fadeTime.setup("Fade time", 2000, 500, 5000));
+
     
     planets['1'] = new PlanetVideo;
     planets['1']->setup("Moon.mp4");
@@ -155,4 +158,10 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+void ofApp::fadeTimeChanged(float &fadeTime) {
+    for (auto& planet: planets) {
+       planet.second->setFadeTime(fadeTime);
+    }
 }

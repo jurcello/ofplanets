@@ -26,6 +26,8 @@ public:
     
     bool isOn();
     void setOn(bool isOn);
+    
+    void setFadeTime(float newFadeTime);
 
 protected:
     bool shouldUpdate();
