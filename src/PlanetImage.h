@@ -18,7 +18,7 @@ class PlanetImage: public Planet {
 public:
     void setup(string imageName);
     void update();
-    void draw();
+    void draw(float intensity);
     
 protected:
     void updateTranslation();

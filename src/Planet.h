@@ -17,7 +17,7 @@ class Planet {
 public:
     virtual void setup(string name) = 0;
     virtual void update() = 0;
-    virtual void draw() = 0;
+    virtual void draw(float intensity) = 0;
     
     void setRadius(int radius);
     

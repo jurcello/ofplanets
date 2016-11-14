@@ -31,9 +31,9 @@ void PlanetVideo::update() {
     }
 }
 
-void PlanetVideo::draw() {
+void PlanetVideo::draw(float intensity) {
     if (shouldUpdate()) {
-        ofSetColor(255, 255, 255, opacity);
+        ofSetColor(255, 255, 255, opacity * intensity);
         video.draw(moonTranslate, newWidth, newHeight);
         ofSetColor(255, 255, 255, 255);
     }

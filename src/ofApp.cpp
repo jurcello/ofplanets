@@ -9,6 +9,7 @@ void ofApp::setup(){
     gui.add(offsetX.setup("X offset", 0, -500, 500));
     gui.add(offsetY.setup("Y offset", 0, -500, 500));
     gui.add(fadeTime.setup("Fade time", 2000, 500, 5000));
+    gui.add(sunStrenght.setup("SunStrenght", 0.0, 0.0, 1.0));
 
     
     planets['1'] = new PlanetVideo;
@@ -39,6 +40,12 @@ void ofApp::setup(){
     planets['o'] = new PlanetImage;
     planets['o']->setup("PROTOTYPE PLANETS_09.jpg");
     
+    sun.setup("Sun.mp4");
+    sun.setOn(true);
+    sun.setRadius(radius);
+    sun.setOffsetX(offsetX);
+    sun.setOffsetY(offsetY);
+    
     for (auto& planet: planets) {
         planet.second->setRadius(radius);
         planet.second->setOffsetX(offsetX);
@@ -51,18 +58,19 @@ void ofApp::update(){
     for (auto& planet: planets) {
         planet.second->update();
     }
+    sun.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(0, 0, 0);
+    for (auto& planet: planets) {
+        planet.second->draw(1 - sunStrenght);
+    }
+    sun.draw(sunStrenght);
     if (showGui) {
         gui.draw();
     }
-    for (auto& planet: planets) {
-        planet.second->draw();
-    }
-
 }
 
 //--------------------------------------------------------------
@@ -102,6 +110,9 @@ void ofApp::keyPressed(int key){
         planet.second->setOffsetX(offsetX);
         planet.second->setOffsetY(offsetY);
     }
+    sun.setRadius(radius);
+    sun.setOffsetX(offsetX);
+    sun.setOffsetY(offsetY);
 }
 
 void ofApp::turnOtherOff(int except) {

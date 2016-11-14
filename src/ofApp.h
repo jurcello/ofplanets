@@ -32,6 +32,8 @@ class ofApp : public ofBaseApp{
     
     map<int, Planet*> planets;
     
+    PlanetVideo sun;
+    
     // Gui.
     ofxPanel gui;
     
@@ -39,6 +41,8 @@ class ofApp : public ofBaseApp{
     ofxIntSlider offsetX;
     ofxIntSlider offsetY;
     ofxFloatSlider fadeTime;
+    
+    ofxFloatSlider sunStrenght;
     
     bool showGui = false;
 };

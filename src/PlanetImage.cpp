@@ -30,9 +30,9 @@ void PlanetImage::update() {
 
 }
 
-void PlanetImage::draw() {
+void PlanetImage::draw(float intensity) {
     if (shouldUpdate()) {
-        ofSetColor(255, 255, 255, opacity);
+        ofSetColor(255, 255, 255, opacity * intensity);
         image.draw(moonTranslate, newWidth, newHeight);
         ofSetColor(255, 255, 255, 255);
     }

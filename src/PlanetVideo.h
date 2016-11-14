@@ -18,7 +18,7 @@ class PlanetVideo: public Planet {
 public:
     void setup(string videoName);
     void update();
-    void draw();
+    void draw(float intensity);
 
 protected:
     void updateTranslation();
