@@ -51,6 +51,10 @@ void Planet::update() {
             moonTranslate.x += (video.getWidth() / 2) * (1 - factorX);
             moonTranslate.y += (video.getHeight() / 2) * (1 - factorY);
             
+            // As a last thing: add the offsets.
+            moonTranslate.x += offsetX;
+            moonTranslate.y += offsetY;
+            
             newWidth = factorX * video.getWidth();
             newHeight = factorY * video.getHeight();
             
@@ -65,4 +69,12 @@ void Planet::draw() {
 
 void Planet::setRadius(int newRadius) {
     radius = newRadius;
+}
+
+void Planet::setOffsetX(int offset) {
+    offsetX = offset;
+}
+
+void Planet::setOffsetY(int offset) {
+    offsetY = offset;
 }

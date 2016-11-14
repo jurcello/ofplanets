@@ -19,6 +19,9 @@ public:
     void update();
     void draw();
     void setRadius(int radius);
+    
+    void setOffsetX(int offset);
+    void setOffsetY(int offset);
 
 protected:
     
@@ -30,6 +33,9 @@ protected:
     
     int width;
     int height;
+    
+    int offsetX = 0;
+    int offsetY = 0;
     
     int radius = 200;
     float newWidth;

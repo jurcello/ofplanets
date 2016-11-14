@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "Planet.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -28,5 +29,12 @@ class ofApp : public ofBaseApp{
     Planet sun;
     Planet jupiter;
     
-    int radius = 200;
+    // Gui.
+    ofxPanel gui;
+    
+    ofxIntSlider radius;
+    ofxIntSlider offsetX;
+    ofxIntSlider offsetY;
+    
+    bool showGui = false;
 };
