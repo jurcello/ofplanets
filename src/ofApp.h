@@ -35,8 +35,13 @@ class ofApp : public ofBaseApp{
     void fadeTimeChanged(float &fadeTime);
     
     map<int, Planet*> planets;
+    map<int, Planet*>::iterator planetIterator;
     
     PlanetVideo sun;
+    
+    bool slideShowOn = false;
+    int lastSlideChange = 0;
+    int lastSlide;
     
     // Gui.
     ofxPanel gui;
@@ -45,10 +50,15 @@ class ofApp : public ofBaseApp{
     ofxIntSlider offsetX;
     ofxIntSlider offsetY;
     ofxFloatSlider fadeTime;
+    ofxIntSlider slideTime;
     
     ofxFloatSlider sunStrenght;
     ofxFloatSlider gain;
    	ofxOscReceiver receiver;
     
     bool showGui = false;
+    
+protected:
+    void updateSlideShow();
+    
 };

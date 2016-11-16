@@ -10,6 +10,7 @@ void ofApp::setup(){
     gui.add(offsetX.setup("X offset", 0, -500, 500));
     gui.add(offsetY.setup("Y offset", 0, -500, 500));
     gui.add(fadeTime.setup("Fade time", 2000, 500, 5000));
+    gui.add(slideTime.setup("Slide time", 20000, 500, 50000));
     gui.add(sunStrenght.setup("SunStrenght", 0.0, 0.0, 1.0));
     gui.add(gain.setup("Gain", 1.0, 0.5, 10.0));
     
@@ -25,8 +26,6 @@ void ofApp::setup(){
     planets['2']->setup("Jupiter.mp4");
     planets['3'] = new PlanetVideo;
     planets['3']->setup("Mercury.mp4");
-    planets['4'] = new PlanetVideo;
-    planets['4']->setup("Mars.mp4");
     
     planets['q'] = new PlanetImage;
     planets['q']->setup("PROTOTYPE PLANETS_01.jpg");
@@ -46,6 +45,28 @@ void ofApp::setup(){
     planets['i']->setup("PROTOTYPE PLANETS_08.jpg");
     planets['o'] = new PlanetImage;
     planets['o']->setup("PROTOTYPE PLANETS_09.jpg");
+    planets['p'] = new PlanetImage;
+    planets['p']->setup("PROTOTYPE PLANETS_11.jpg");
+    planets['z'] = new PlanetImage;
+    planets['z']->setup("PROTOTYPE PLANETS_12.jpg");
+    planets['x'] = new PlanetImage;
+    planets['x']->setup("PROTOTYPE PLANETS_13.jpg");
+    planets['c'] = new PlanetImage;
+    planets['c']->setup("PROTOTYPE PLANETS_14.jpg");
+    planets['v'] = new PlanetImage;
+    planets['v']->setup("PROTOTYPE PLANETS_15.jpg");
+    planets['b'] = new PlanetImage;
+    planets['b']->setup("PROTOTYPE PLANETS_16.jpg");
+    planets['n'] = new PlanetImage;
+    planets['n']->setup("PROTOTYPE PLANETS_17.jpg");
+    planets['m'] = new PlanetImage;
+    planets['m']->setup("PROTOTYPE PLANETS_18.jpg");
+    planets[','] = new PlanetImage;
+    planets[',']->setup("PROTOTYPE PLANETS_19.jpg");
+    
+    // Set the last slide to the first image and set the planet to on.
+    lastSlide = 'q';
+    planets['q']->setOn(true);
     
     sun.setup("Sun.mp4");
     sun.setOn(true);
@@ -62,6 +83,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    updateSlideShow();
     // check for waiting messages
     while(receiver.hasWaitingMessages()){
         // get the next message
@@ -113,6 +135,9 @@ void ofApp::keyPressed(int key){
             break;
         case 'g':
             showGui = !showGui;
+            break;
+        case 's':
+            slideShowOn = !slideShowOn;
             break;
         default:
             if (planets.find(key) != planets.end()) {
@@ -191,5 +216,20 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 void ofApp::fadeTimeChanged(float &fadeTime) {
     for (auto& planet: planets) {
        planet.second->setFadeTime(fadeTime);
+    }
+}
+
+void ofApp::updateSlideShow() {
+    if (slideShowOn && (ofGetElapsedTimeMillis() - lastSlideChange > slideTime)) {
+        planetIterator = planets.find(lastSlide);
+        // Set the planet to off.
+        planetIterator->second->setOn(false);
+        planetIterator++;
+        if (planetIterator == planets.end()) {
+            planetIterator = planets.begin();
+        }
+        lastSlide = planetIterator->first;
+        planetIterator->second->setOn(true);
+        lastSlideChange = ofGetElapsedTimeMillis();
     }
 }

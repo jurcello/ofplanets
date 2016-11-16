@@ -10,6 +10,7 @@
 
 void PlanetVideo::setup(string videoName) {
     video.load(videoName);
+    video.setVolume(0);
     video.play();
     video.setLoopState(OF_LOOP_NORMAL);
     width = video.getWidth();
